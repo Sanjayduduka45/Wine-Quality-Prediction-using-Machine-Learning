@@ -4,7 +4,7 @@ A machine learning project that predicts whether a wine is **Good** or **Bad** b
 
 **🔗 GitHub Repository**
 
-:contentReference[oaicite:0]{index=0}
+https://github.com/Sanjayduduka45/Wine-Quality-Prediction-using-Machine-Learning.git
 
 ---
 
@@ -252,4 +252,4 @@ B.Tech Computer Science & Engineering
 
 Machine Learning | Data Science | Python | SQL
 
-GitHub: :contentReference[oaicite:1]{index=1}
+GitHub: https://github.com/Sanjayduduka45
