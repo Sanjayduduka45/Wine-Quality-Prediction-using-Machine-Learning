@@ -1,36 +1,41 @@
 # 🍷 Wine Quality Prediction using Machine Learning
 
-A machine learning project that predicts whether a wine is **Good** or **Bad** based on its physicochemical properties. This project was completed as part of my Machine Learning coursework and follows the complete ML workflow from data preprocessing to model optimization.
-
-**🔗 GitHub Repository**
-
-https://github.com/Sanjayduduka45/Wine-Quality-Prediction-using-Machine-Learning.git
+Predicting whether a wine is **Good** or **Bad** using physicochemical properties and classical Machine Learning algorithms.
 
 ---
 
-# 📌 Project Overview
+## Project Overview
 
-The Wine Quality dataset contains various chemical properties of red wine along with quality ratings ranging from **3 to 8**.
+This project builds a binary classification model to predict wine quality using laboratory measurements. The original **quality** score was transformed into a binary target:
 
-Instead of predicting multiple quality scores, I converted the problem into a **binary classification** task.
+- **Good (1)** → Quality ≥ 7
+- **Bad (0)** → Quality < 7
 
-- Good Wine → Quality > 7
-- Bad Wine → Quality ≤ 7
-
-The objective was to compare different machine learning algorithms, identify the best-performing model, optimize it using GridSearchCV, and save the trained model for future predictions.
+The project follows a complete machine learning workflow, including exploratory data analysis, preprocessing, model comparison, hyperparameter tuning, feature importance analysis, and model persistence.
 
 ---
 
-# 📂 Dataset Information
+## Repository
 
-- Dataset: Wine Quality Dataset
-- Number of Features: **11**
-- Target Column: **quality**
-- Records after removing duplicates: **1359**
-- Missing Values: **0**
-- Duplicate Records: Removed
+**GitHub Repository**
 
-### Features
+:contentReference[oaicite:0]{index=0}
+
+---
+
+## Problem Statement
+
+Wine quality is generally determined through sensory evaluation performed by experts, making the process subjective and time-consuming.
+
+The objective of this project is to develop a machine learning model that predicts wine quality directly from measurable chemical properties, enabling faster and more consistent quality assessment.
+
+---
+
+## Dataset Information
+
+The dataset contains **11 physicochemical features** collected from red wine samples.
+
+### Input Features
 
 - Fixed Acidity
 - Volatile Acidity
@@ -44,144 +49,128 @@ The objective was to compare different machine learning algorithms, identify the
 - Sulphates
 - Alcohol
 
+### Target Variable
+
+Original Target
+
+```
+quality
+```
+
+Binary Target
+
+```
+quality_label
+
+0 → Bad Wine
+1 → Good Wine
+```
+
 ---
 
-# ⚙️ Project Workflow
+## Machine Learning Workflow
 
-## 1. Data Loading
-
-- Imported required Python libraries
-- Loaded dataset using Pandas
-- Viewed dataset
-- Checked dimensions
-- Verified data types
+- Dataset Loading
+- Exploratory Data Analysis
+- Missing Value Analysis
+- Duplicate Record Removal
+- Correlation Analysis
+- Binary Target Creation
+- Feature & Target Separation
+- Train-Test Split
+- Feature Scaling using StandardScaler
+- Model Training
+- Model Comparison
+- Hyperparameter Tuning using GridSearchCV
+- Model Evaluation
+- Learning Curve Analysis
+- Permutation Feature Importance
+- Model Serialization
 
 ---
 
-## 2. Data Cleaning
+## Data Preprocessing
 
-Performed the following preprocessing steps:
+The following preprocessing steps were performed:
 
-- Checked missing values
 - Removed duplicate records
-- Generated descriptive statistics
-- Checked feature correlations
-- Created binary target variable
-- Split dataset into training and testing sets
-- Balanced the training data using **SMOTE**
+- Created binary target labels
+- Stratified train-test split
+- Standardized numerical features using StandardScaler
+- Compared models on identical train-test partitions
 
 ---
 
-## 3. Exploratory Data Analysis
+## Models Evaluated
 
-The following visualizations were created during the analysis:
+Three supervised machine learning algorithms were trained and compared.
 
-- Correlation Heatmap
-- Class Distribution Plot
-- Model Accuracy Comparison
-- Model Performance Comparison
-- ROC Curve
-- Confusion Matrix
-- Feature Importance Plot
+| Model | Purpose |
+|-------|----------|
+| Logistic Regression | Baseline linear classifier |
+| K-Nearest Neighbors (KNN) | Distance-based classification |
+| Decision Tree | Rule-based classification |
 
----
-
-# 🤖 Machine Learning Models
-
-The following models were trained and evaluated.
-
-### Logistic Regression
-
-- StandardScaler applied
-- Hyperparameter tuning using GridSearchCV
-
----
-
-### K-Nearest Neighbors (KNN)
-
-- Trained using scaled features
-- Compared with other classifiers
-
----
-
-### Decision Tree
-
-- Trained using original features
-- Used for model comparison
-
----
-
-# 📊 Model Evaluation
-
-Models were evaluated using multiple classification metrics instead of relying only on accuracy.
-
-Evaluation Metrics:
+Models were evaluated using:
 
 - Accuracy
 - Precision
 - Recall
-- F1 Score
-- ROC Curve
+- F1-Score
 - Confusion Matrix
 
-After comparing all models, **Logistic Regression** achieved the best overall performance based on F1 Score and was selected as the final model.
+---
+
+## Hyperparameter Tuning
+
+The highest-performing baseline model (**K-Nearest Neighbors**) was optimized using **GridSearchCV**.
+
+Parameters tuned include:
+
+- Number of Neighbors
+- Weight Strategy
+- Distance Metric
+- Minkowski Distance Parameter (p)
 
 ---
 
-# 🔍 Hyperparameter Tuning
+## Model Evaluation
 
-GridSearchCV was applied to improve the Logistic Regression model.
+The optimized model was evaluated using:
 
-### Parameters Tuned
+- Classification Report
+- Confusion Matrix
+- Accuracy
+- Precision
+- Recall
+- F1-Score
+- Learning Curve
 
-- Regularization Strength (C)
-- Solver
-- Penalty
-
-### Best Parameters
-
-```text
-C = 10
-Penalty = L2
-Solver = lbfgs
-```
+Learning curve analysis was additionally used to study the model's generalization behaviour after hyperparameter tuning.
 
 ---
 
-# 📈 Feature Importance
+## Feature Importance
 
-Feature importance was analyzed using the coefficients of the optimized Logistic Regression model.
+Since K-Nearest Neighbors does not provide native feature importance scores, **Permutation Importance** was used to estimate the contribution of each feature.
 
-The most influential features observed were:
+The analysis identified the following features as having the strongest influence on prediction:
 
-- Chlorides
 - Alcohol
+- Sulphates
+- Volatile Acidity
 - Total Sulfur Dioxide
-- pH
-- Citric Acid
+- Residual Sugar
 
 ---
 
-# 🛠️ Technologies Used
-
-- Python
-- Pandas
-- NumPy
-- Matplotlib
-- Seaborn
-- Scikit-learn
-- Imbalanced-learn (SMOTE)
-- Joblib
-
----
-
-# 📁 Project Structure
+## Project Structure
 
 ```
 Wine-Quality-Prediction-using-Machine-Learning
 │
+├── Wine_Quality_Pred.ipynb
 ├── winequality.csv
-├── winequality.ipynb
 ├── wine_quality_model.pkl
 ├── scaler.pkl
 ├── README.md
@@ -190,66 +179,42 @@ Wine-Quality-Prediction-using-Machine-Learning
 
 ---
 
-# 🚀 How to Run
+## Technologies Used
 
-### Clone the Repository
-
-```bash
-git clone https://github.com/Sanjayduduka45/Wine-Quality-Prediction-using-Machine-Learning.git
-```
-
-Move into the project directory
-
-```bash
-cd Wine-Quality-Prediction-using-Machine-Learning
-```
-
-Install the required libraries
-
-```bash
-pip install pandas numpy matplotlib seaborn scikit-learn imbalanced-learn joblib
-```
-
-Launch Jupyter Notebook
-
-```bash
-jupyter notebook
-```
-
-Open
-
-```
-winequality.ipynb
-```
-
-and run all cells sequentially.
+- Python
+- Pandas
+- NumPy
+- Matplotlib
+- Seaborn
+- Scikit-learn
+- Joblib
 
 ---
 
-# 📚 What I Learned
+## Key Outcomes
 
-Working on this project helped me understand the complete machine learning pipeline beyond simply training a model.
-
-Some of the key concepts I practiced include:
-
-- Data preprocessing
-- Exploratory Data Analysis (EDA)
-- Handling imbalanced datasets using SMOTE
-- Feature scaling with StandardScaler
-- Binary classification
-- Comparing multiple machine learning models
-- Hyperparameter tuning using GridSearchCV
-- Model evaluation using Precision, Recall, F1 Score, ROC Curve and Confusion Matrix
-- Saving trained models using Joblib
+- Converted the original quality scores into a binary classification problem.
+- Compared three classical machine learning algorithms.
+- Optimized the best-performing model using GridSearchCV.
+- Evaluated model performance using multiple classification metrics.
+- Analysed feature influence using permutation importance.
+- Saved the trained model and preprocessing scaler for deployment or future inference.
 
 ---
 
-# 👨‍💻 Author
+## Future Improvements
 
-Sanjay Duduka
+- Evaluate ensemble models such as Random Forest, Gradient Boosting, and XGBoost.
+- Improve minority-class prediction using advanced resampling techniques.
+- Build a Streamlit web application for real-time wine quality prediction.
+- Extend the solution to predict the original multi-class wine quality score.
 
-B.Tech Computer Science & Engineering
+---
 
-Machine Learning | Data Science | Python | SQL
+## Author
 
-GitHub: https://github.com/Sanjayduduka45
+**Sanjay Duduka**
+
+Machine Learning • Data Science • Python • Scikit-learn
+
+GitHub: :contentReference[oaicite:1]{index=1}
